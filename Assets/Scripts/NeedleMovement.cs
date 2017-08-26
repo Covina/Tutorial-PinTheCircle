@@ -23,7 +23,9 @@ public class NeedleMovement : MonoBehaviour {
 	{
 
 		Initialize ();
-		FireTheNeedle();
+
+		// TODO - debug to remvoe
+		//FireTheNeedle();	
 
 	}
 
