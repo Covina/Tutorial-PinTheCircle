@@ -5,17 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-
 	// Generic Scene Loader
 	public void LoadScene(string sceneName) 
 	{
@@ -24,5 +13,12 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 
+	// Reload the current scene
+	public void ResetCurrentScene() 
+	{
+
+		SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+
+	}
 
 }

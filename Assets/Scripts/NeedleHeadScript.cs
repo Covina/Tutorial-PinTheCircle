@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class NeedleHeadScript : MonoBehaviour {
 
+	void Start ()
+	{
+		// start circle as black;
+		GetComponent<SpriteRenderer>().color = GameManager.instance.currentColor;
+	}
+
 
 	// Find out if two needle heads have collided
 	void OnTriggerEnter2D (Collider2D target)

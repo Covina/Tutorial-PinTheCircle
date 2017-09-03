@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
 	// the shoot button
 	public Button shootButton;
 
+	[SerializeField] private Button mainMenuButton;
+	[SerializeField] private Button playAgainButton;
+
 	// get access to the needle object
 	[SerializeField] private GameObject needle;
 
@@ -28,6 +31,14 @@ public class GameManager : MonoBehaviour {
 	// keep track of the score.
 	private int score = 0;
 
+	// set 5 color cycle
+	private Color[] circleColors = new Color[5];
+
+	// Store the current color for the circle and the pin heads
+	public Color currentColor;
+
+	// Where are we in the color array
+	private int colorIndex = 0;
 
 	// Use this for initialization
 	void Awake ()
@@ -37,6 +48,16 @@ public class GameManager : MonoBehaviour {
 
 			instance = this;
 		}
+
+		// Define the set of colors to choose from 
+		circleColors[0] = Color.black;
+		circleColors[1] = Color.red;
+		circleColors[2] = Color.blue;
+		circleColors[3] = Color.green;
+		circleColors[4] = Color.yellow;
+
+		// set current color
+		currentColor = circleColors[0];
 
 	}
 
@@ -48,11 +69,19 @@ public class GameManager : MonoBehaviour {
 		// Create the first needle
 		InstantiateNeedle();
 
+		// start at zero
+		scoreText.text = score.ToString();
+
+
+		// GAME OVER STUFF
+
 		// disable the game over text
 		gameOverText.enabled = false;
 
-		// start at zero
-		scoreText.text = score.ToString();
+		// turn off game over nav buttons
+		mainMenuButton.gameObject.SetActive(false);
+		playAgainButton.gameObject.SetActive(false);
+
 
 	}
 
@@ -85,10 +114,30 @@ public class GameManager : MonoBehaviour {
 	{
 		// increment the score
 		score++;
-		scoreText.text = score.ToString();
+		scoreText.text = score.ToString ();
+
+		// change size every 5 points
+		if (score % 5 == 0) {
+
+			// change colors
+			colorIndex++;
+
+			// loop back if we've gone around
+			colorIndex = (colorIndex > circleColors.Length) ? 0 : colorIndex;
+
+			// set the new color
+			currentColor = circleColors[colorIndex];
+
+			// Increase the size
+			GameObject.Find ("Circle_Large").GetComponent<CircleRotate> ().IncrementCircleSize ();
+
+
+
+		}
 
 		// Increase the rotation speed
 		GameObject.Find("Circle_Large").GetComponent<CircleRotate>().rotationSpeed += rotationIncreaseIncrement;
+
 
 		// Spawn the next needle
 		InstantiateNeedle();
@@ -109,10 +158,22 @@ public class GameManager : MonoBehaviour {
 		gameOverText.enabled = true;
 
 		// Disable the Shoot touch button to prevent errors
-		shootButton.enabled = false;
+		shootButton.gameObject.SetActive(false);
+
+		// Turn ON game over nav buttons
+		mainMenuButton.gameObject.SetActive(true);
+		playAgainButton.gameObject.SetActive(true);
 
 	}
 
+
+
+	void ResetGame()
+	{
+
+
+
+	}
 
 
 }
