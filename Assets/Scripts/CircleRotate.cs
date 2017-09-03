@@ -16,8 +16,6 @@ public class CircleRotate : MonoBehaviour {
 	private float angle;
 
 
-
-
 	void Start ()
 	{
 
