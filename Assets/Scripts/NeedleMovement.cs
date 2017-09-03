@@ -8,7 +8,7 @@ public class NeedleMovement : MonoBehaviour {
 	private GameObject needleBody;
 
 
-	private bool canFireNeedle;
+	private bool needleMoving;
 	private bool touchedTheCircle;
 
 
@@ -24,23 +24,18 @@ public class NeedleMovement : MonoBehaviour {
 
 		// get the Rigidbody of the Parent Needle object for use later
 		myBody = GetComponent<Rigidbody2D>();
-		Debug.Log("MyBody:" + myBody);
+		//Debug.Log("MyBody:" + myBody);
 
 		Initialize ();
 
 	}
 
 
-//	// Use this for initialization
-//	void Start () {
-//		
-//	}
-	
 	// Update is called once per frame
 	void Update ()
 	{
 
-		if (canFireNeedle == true) {
+		if (needleMoving == true) {
 
 			// apply force in the Y axis
 			myBody.velocity = new Vector2(0, forceY);
@@ -57,11 +52,9 @@ public class NeedleMovement : MonoBehaviour {
 		// deactivate the needlebody to start
 		needleBody.SetActive(false);
 
-
-
 	}
 
-
+	// Display the pin and start moving the needle
 	public void FireTheNeedle ()
 	{
 		// reactivate the needle
@@ -71,9 +64,10 @@ public class NeedleMovement : MonoBehaviour {
 		myBody.isKinematic = false;
 
 		// set the bool that we can fire the needle
-		canFireNeedle = true;
+		needleMoving = true;
 
 	}
+
 
 	// stop the needle when it hits the circle
 	void OnTriggerEnter2D (Collider2D target)
@@ -92,36 +86,31 @@ public class NeedleMovement : MonoBehaviour {
 		// Detect if we collided with the Circle
 		if (target.tag == "Circle") {
 
+			Debug.Log("OnTriggerEnter2D::NeedleMovement = hit tag 'Circle', updating values");
 
-			//Debug.Log("hit Circle, updating values");
-
-			// Disable firing the needle
-			canFireNeedle = false;
+			// Stop the needle from moving
+			needleMoving = false;
 
 			// Flag this needle as having touched the circle
 			touchedTheCircle = true;
 
-			// disable physics on the needle
+			// Disable physics on the needle
 			myBody.isKinematic = true;
-			myBody.simulated = false;
+			myBody.bodyType = RigidbodyType2D.Static;
 
-			// make the needle part of the Circle object so they all rotate together
+
+			// Move the needle into a child object of the Circle so it sticks and rotates together
 			transform.parent = target.transform;
-
 
 			// Update the score
 			if (GameManager.instance != null) {
 
 				// incremenet and update the score
 				GameManager.instance.SetScore();
-
 	
 			}
 
-			//Debug.Log("canFireNeedle:[" + canFireNeedle + "]");
-
 		}
-
 
 	}
 

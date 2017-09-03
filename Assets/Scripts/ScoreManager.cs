@@ -18,22 +18,24 @@ public class ScoreManager : MonoBehaviour {
 	void Awake ()
 	{
 
+		// Create instance
 		if (instance == null) {
 			instance = this;
 		}
 
-		// start at zero
+		// Start the core at zero
 		scoreText.text = score.ToString();
 
 	}
 
-	public void SetScore ()
-	{
-		// increment the score
-		score++;
-		scoreText.text = score.ToString();
-
-		Debug.Log("SetScore() called");
-	}
+//	// Updae the display of the score
+//	public void SetScore ()
+//	{
+//		// increment the score
+//		score++;
+//		scoreText.text = score.ToString();
+//
+//		//Debug.Log("SetScore() called");
+//	}
 
 }

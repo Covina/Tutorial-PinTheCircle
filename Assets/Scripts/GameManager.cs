@@ -8,12 +8,6 @@ public class GameManager : MonoBehaviour {
 	// for creating a singleton
 	public static GameManager instance;
 
-	// How many needles does the player get for this level
-//	[SerializeField] private int howManyNeedles = 10;
-
-	// get access to the needle object
-	[SerializeField] private GameObject needle;
-
 
 	// Game Over Text
 	public Text gameOverText;
@@ -21,11 +15,13 @@ public class GameManager : MonoBehaviour {
 	// the shoot button
 	public Button shootButton;
 
+	// get access to the needle object
+	[SerializeField] private GameObject needle;
+
 	private GameObject needleToFire;
 
 	// the increment of speed increase per successful pin placement
 	private float rotationIncreaseIncrement = 5f;
-
 
 	// Text object for the score display
 	[SerializeField] private Text scoreText;
@@ -43,9 +39,7 @@ public class GameManager : MonoBehaviour {
 			instance = this;
 		}
 
-
 	}
-
 
 
 	// Start up the game

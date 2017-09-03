@@ -13,12 +13,7 @@ public class CircleRotate : MonoBehaviour {
 	// what is the angle
 	private float angle;
 
-	// Use this for initialization
-	void Awake () {
 
-		StartCoroutine( ChangeRotation() );
-	}
-	
 	// Update is called once per frame
 	void Update ()
 	{
@@ -30,13 +25,11 @@ public class CircleRotate : MonoBehaviour {
 
 		}
 
-
 	}
 
 	// Rotate the circle
 	void RotateTheCircle() 
 	{
-
 		// get the current angle
 		angle = transform.rotation.eulerAngles.z;
 
@@ -46,21 +39,6 @@ public class CircleRotate : MonoBehaviour {
 		// set the rotation position of the circle
 		transform.rotation = Quaternion.Euler( new Vector3(0,0,angle) );
 
-
 	}
-
-
-	IEnumerator ChangeRotation ()
-	{
-
-		yield return new WaitForSeconds(3f);
-		rotationSpeed += 5f;
-
-
-		// endless loop
-		StartCoroutine( ChangeRotation() );
-
-	}
-
 
 }

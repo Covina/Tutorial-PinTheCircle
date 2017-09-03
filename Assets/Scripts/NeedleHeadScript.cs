@@ -5,12 +5,13 @@ using UnityEngine;
 public class NeedleHeadScript : MonoBehaviour {
 
 
+	// Find out if two needle heads have collided
 	void OnTriggerEnter2D (Collider2D target)
 	{
 
-		Debug.Log("NeedleHeadScript() needlhead");
+		Debug.Log("OnTriggerEnter2D::NeedleHeadScript()");
 
-		// if the needle head collides with another needlehead, the game ends
+		// if two needle heads collide, the game ends
 		if (target.tag == "NeedleHead") {
 
 			GameManager.instance.GameOver();
