@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class CircleRotate : MonoBehaviour {
 
+	// rotation speed of the circle
+	public float rotationSpeed = 25f;
 
-	[SerializeField] private float rotationSpeed = 50f;
-
-
+	// can the circle rotate?
 	private bool canRotate = true;
 
+	// what is the angle
 	private float angle;
 
 	// Use this for initialization
 	void Awake () {
-		
+
+		StartCoroutine( ChangeRotation() );
 	}
 	
 	// Update is called once per frame
@@ -31,7 +33,7 @@ public class CircleRotate : MonoBehaviour {
 
 	}
 
-
+	// Rotate the circle
 	void RotateTheCircle() 
 	{
 
@@ -41,10 +43,24 @@ public class CircleRotate : MonoBehaviour {
 		// rotate according to speed and frame rate
 		angle += rotationSpeed * Time.deltaTime;
 
-
 		// set the rotation position of the circle
 		transform.rotation = Quaternion.Euler( new Vector3(0,0,angle) );
 
 
 	}
+
+
+	IEnumerator ChangeRotation ()
+	{
+
+		yield return new WaitForSeconds(3f);
+		rotationSpeed += 5f;
+
+
+		// endless loop
+		StartCoroutine( ChangeRotation() );
+
+	}
+
+
 }

@@ -8,12 +8,15 @@ public class GameManager : MonoBehaviour {
 	// for creating a singleton
 	public static GameManager instance;
 
-
-	[SerializeField] private int howManyNeedles;
+	// How many needles does the player get for this level
+	[SerializeField] private int howManyNeedles = 10;
 
 	// get access to the needle object
 	[SerializeField] private GameObject needle;
 
+
+	// Game Over Text
+	public Text gameOverText;
 
 	// the shoot button
 	private Button shootButton;
@@ -26,6 +29,18 @@ public class GameManager : MonoBehaviour {
 
 	// tracking how many needles we've fired
 	private int needleIndex = 0;
+
+	// the increment of speed increase per successful pin placement
+	private float rotationIncreaseIncrement = 5f;
+
+	// Score Management START ------------------ //
+
+	// Text object for the score display
+	[SerializeField] private Text scoreText;
+
+	// keep track of the score.
+	private int score = 0;
+	// Score Management END ------------------ //
 
 
 	// Use this for initialization
@@ -40,6 +55,8 @@ public class GameManager : MonoBehaviour {
 		// set button reference
 		GetButton();
 
+
+
 	}
 
 
@@ -47,6 +64,12 @@ public class GameManager : MonoBehaviour {
 	{
 		// create the series of needles on start
 		CreateNeedles();
+
+		// disable the game over text
+		gameOverText.enabled = false;
+
+		// start at zero
+		scoreText.text = score.ToString();
 
 	}
 
@@ -130,6 +153,34 @@ public class GameManager : MonoBehaviour {
 	}
 
 
+	public void SetScore ()
+	{
+		// increment the score
+		score++;
+		scoreText.text = score.ToString();
+
+		// Increase the rotation speed
+		GameObject.Find("Circle_Large").GetComponent<CircleRotate>().rotationSpeed += rotationIncreaseIncrement;
+
+		//Debug.Log("SetScore() called");
+	}
+
+
+	public void GameOver()
+	{
+		// log game over
+		Debug.Log("Game Over");
+
+		// end game movement
+		Time.timeScale = 0f;
+
+		// display game over text
+		gameOverText.enabled = true;
+
+		// remove the functionality from the button to prevent errors
+		shootButton.onClick.RemoveAllListeners();
+
+	}
 
 
 

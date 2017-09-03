@@ -109,6 +109,14 @@ public class NeedleMovement : MonoBehaviour {
 			transform.parent = target.transform;
 
 
+			// Update the score
+			if (GameManager.instance != null) {
+
+				// incremenet and update the score
+				GameManager.instance.SetScore();
+	
+			}
+
 			//Debug.Log("canFireNeedle:[" + canFireNeedle + "]");
 
 		}
