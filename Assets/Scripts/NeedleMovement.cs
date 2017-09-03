@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class NeedleMovement : MonoBehaviour {
 
-	[SerializeField]
-	private GameObject needleBody;
+	// the long needle body
+	[SerializeField] private GameObject needleBody;
 
-
+	// Is the needle moving through game space?
 	private bool needleMoving;
-	private bool touchedTheCircle;
 
+	// Has the Needle hit the center circle?
+	private bool touchedTheCircle;
 
 	// Needle speed
 	private float forceY = 5f;
@@ -35,6 +36,7 @@ public class NeedleMovement : MonoBehaviour {
 	void Update ()
 	{
 
+		// if the needle object is moving, keep moving it
 		if (needleMoving == true) {
 
 			// apply force in the Y axis
@@ -73,15 +75,12 @@ public class NeedleMovement : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D target)
 	{
 
-		//Debug.Log(gameObject.name + " just collided with " + target.gameObject.name + " with tag value [" + target.tag + "]");
-
 		// Ignore if we're already touching the circle
 		if (touchedTheCircle == true) {
 
 			return;
 
 		}
-
 
 		// Detect if we collided with the Circle
 		if (target.tag == "Circle") {

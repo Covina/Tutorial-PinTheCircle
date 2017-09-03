@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour {
 	// for creating a singleton
 	public static GameManager instance;
 
-
 	// Game Over Text
 	public Text gameOverText;
 
@@ -109,8 +108,8 @@ public class GameManager : MonoBehaviour {
 		// display game over text
 		gameOverText.enabled = true;
 
-		// remove the functionality from the button to prevent errors
-		shootButton.onClick.RemoveAllListeners();
+		// Disable the Shoot touch button to prevent errors
+		shootButton.enabled = false;
 
 	}
 

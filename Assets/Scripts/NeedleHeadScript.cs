@@ -9,7 +9,7 @@ public class NeedleHeadScript : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D target)
 	{
 
-		Debug.Log("OnTriggerEnter2D::NeedleHeadScript()");
+		//Debug.Log("OnTriggerEnter2D::NeedleHeadScript()");
 
 		// if two needle heads collide, the game ends
 		if (target.tag == "NeedleHead") {

@@ -28,14 +28,5 @@ public class ScoreManager : MonoBehaviour {
 
 	}
 
-//	// Updae the display of the score
-//	public void SetScore ()
-//	{
-//		// increment the score
-//		score++;
-//		scoreText.text = score.ToString();
-//
-//		//Debug.Log("SetScore() called");
-//	}
 
 }

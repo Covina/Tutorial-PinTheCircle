@@ -13,7 +13,6 @@ public class CircleRotate : MonoBehaviour {
 	// what is the angle
 	private float angle;
 
-
 	// Update is called once per frame
 	void Update ()
 	{
