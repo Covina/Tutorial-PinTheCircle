@@ -20,7 +20,7 @@ public class NeedleHeadScript : MonoBehaviour {
 		// if two needle heads collide, the game ends
 		if (target.tag == "NeedleHead") {
 
-			GameManager.instance.GameOver();
+			GameObject.FindGameObjectWithTag("GameConfig").GetComponent<GamePlayConfig>().GameOver();
 
 		}
 

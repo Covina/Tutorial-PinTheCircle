@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour {
 	// the shoot button
 	public Button shootButton;
 
-	[SerializeField] private Button mainMenuButton;
-	[SerializeField] private Button playAgainButton;
+	public Button mainMenuButton;
+	public Button playAgainButton;
 
 	// get access to the needle object
 	[SerializeField] private GameObject needle;
@@ -181,26 +181,26 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log("SetScore() called");
 	}
 
-	// Handling the game end conditions
-	public void GameOver()
-	{
-		// log game over
-		Debug.Log("Game Over");
-
-		// end game movement
-		Time.timeScale = 0f;
-
-		// display game over text
-		gameOverText.enabled = true;
-
-		// Disable the Shoot touch button to prevent errors
-		shootButton.gameObject.SetActive(false);
-
-		// Turn ON game over nav buttons
-		mainMenuButton.gameObject.SetActive(true);
-		playAgainButton.gameObject.SetActive(true);
-
-	}
+//	// Handling the game end conditions
+//	public void GameOver()
+//	{
+//		// log game over
+//		Debug.Log("Game Over");
+//
+//		// end game movement
+//		Time.timeScale = 0f;
+//
+//		// display game over text
+//		gameOverText.enabled = true;
+//
+//		// Disable the Shoot touch button to prevent errors
+//		shootButton.gameObject.SetActive(false);
+//
+//		// Turn ON game over nav buttons
+//		mainMenuButton.gameObject.SetActive(true);
+//		playAgainButton.gameObject.SetActive(true);
+//
+//	}
 
 
 

@@ -7,7 +7,7 @@ public class CircleRotate : MonoBehaviour {
 	// rotation speed of the circle
 	private float rotationSpeed = 25f;
 
-	private float circleRadiusIncrement = -0.075f;
+	private float circleRadiusIncrement = -0.06f;
 
 	// can the circle rotate?
 	private bool canRotate = true;
