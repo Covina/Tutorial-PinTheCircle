@@ -7,7 +7,7 @@ public class NeedleHeadScript : MonoBehaviour {
 	void Start ()
 	{
 		// start circle as black;
-		GetComponent<SpriteRenderer>().color = GameManager.instance.currentColor;
+		GetComponent<SpriteRenderer>().color = GameManager.instance.CurrentColor;
 	}
 
 

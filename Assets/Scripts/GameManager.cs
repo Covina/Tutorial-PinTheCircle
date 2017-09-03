@@ -23,22 +23,60 @@ public class GameManager : MonoBehaviour {
 	private GameObject needleToFire;
 
 	// the increment of speed increase per successful pin placement
-	private float rotationIncreaseIncrement = 5f;
+	private float rotationIncreaseIncrement;
+	public float RotationIncreaseIncrement 
+	{
+		get {
+			return rotationIncreaseIncrement;
+		}
+
+		set {
+			rotationIncreaseIncrement = value;
+		}
+	}
 
 	// Text object for the score display
 	[SerializeField] private Text scoreText;
 
 	// keep track of the score.
 	private int score = 0;
+	public int Score 
+	{
+		get {
+			return score;
+		}
+
+		set {
+			score = value;
+		}
+	}
+
 
 	// set 5 color cycle
 	private Color[] circleColors = new Color[5];
 
 	// Store the current color for the circle and the pin heads
-	public Color currentColor;
+	private Color currentColor;
+	public Color CurrentColor {
+		get {
+			return currentColor;
+		}
+		set {
+			currentColor = value;
+		}
+	}
+
 
 	// Where are we in the color array
-	private int colorIndex = 0;
+	private int colorIndex;
+	public int ColorIndex {
+		get {
+			return colorIndex;
+		}
+		set {
+			colorIndex = value;
+		}
+	}
 
 	// Use this for initialization
 	void Awake ()
@@ -56,8 +94,8 @@ public class GameManager : MonoBehaviour {
 		circleColors[3] = Color.green;
 		circleColors[4] = Color.yellow;
 
-		// set current color
-		currentColor = circleColors[0];
+		// set starting color
+		currentColor = circleColors[colorIndex];
 
 	}
 
@@ -131,12 +169,10 @@ public class GameManager : MonoBehaviour {
 			// Increase the size
 			GameObject.Find ("Circle_Large").GetComponent<CircleRotate> ().IncrementCircleSize ();
 
-
-
 		}
 
-		// Increase the rotation speed
-		GameObject.Find("Circle_Large").GetComponent<CircleRotate>().rotationSpeed += rotationIncreaseIncrement;
+		// Increase the speed on every hit
+		GameObject.Find ("Circle_Large").GetComponent<CircleRotate> ().IncrementRotationSpeed ();
 
 
 		// Spawn the next needle
@@ -166,14 +202,6 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-
-
-	void ResetGame()
-	{
-
-
-
-	}
 
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CircleRotate : MonoBehaviour {
 
 	// rotation speed of the circle
-	public float rotationSpeed = 25f;
+	private float rotationSpeed = 25f;
 
 	private float circleRadiusIncrement = -0.075f;
 
@@ -15,7 +15,6 @@ public class CircleRotate : MonoBehaviour {
 	// what is the angle
 	private float angle;
 
-	private int colorIndex = 0;
 
 
 
@@ -33,7 +32,7 @@ public class CircleRotate : MonoBehaviour {
 
 
 		// start circle as black;
-		GetComponent<SpriteRenderer>().color = GameManager.instance.currentColor;
+		GetComponent<SpriteRenderer>().color = GameManager.instance.CurrentColor;
 
 
 	}
@@ -78,9 +77,21 @@ public class CircleRotate : MonoBehaviour {
 		transform.localScale = newSize;
 
 		// set color
-		GetComponent<SpriteRenderer>().color = GameManager.instance.currentColor;
+		GetComponent<SpriteRenderer>().color = GameManager.instance.CurrentColor;
 
 
 	}
+
+	// increase the rotation speed of the circle
+	public void IncrementRotationSpeed ()
+	{
+		Debug.Log("IncrementRotationSpeed() called.  Current Rotation Speed: " + rotationSpeed);
+		Debug.Log(".. adding speed increment: " + GameManager.instance.RotationIncreaseIncrement);
+
+		// Increase the rotation speed
+		rotationSpeed += GameManager.instance.RotationIncreaseIncrement;
+
+	}
+
 
 }
