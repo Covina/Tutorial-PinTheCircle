@@ -8,7 +8,6 @@ public class ScoreManager : MonoBehaviour {
 
 	public static ScoreManager instance;
 
-
 	// Text object for the score display
 	[SerializeField] private Text scoreText;
 

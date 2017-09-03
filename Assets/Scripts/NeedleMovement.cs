@@ -114,6 +114,8 @@ public class NeedleMovement : MonoBehaviour {
 
 				// incremenet and update the score
 				GameManager.instance.SetScore();
+
+				GameManager.instance.InstantiateNeedle();
 	
 			}
 
