@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 
 	// How many needles does the player get for this level
-	[SerializeField] private int howManyNeedles = 10;
+//	[SerializeField] private int howManyNeedles = 10;
 
 	// get access to the needle object
 	[SerializeField] private GameObject needle;
@@ -19,28 +19,19 @@ public class GameManager : MonoBehaviour {
 	public Text gameOverText;
 
 	// the shoot button
-	private Button shootButton;
+	public Button shootButton;
 
-	// store the needles to be fired and in play for this round
-	private GameObject[] gameNeedles;
-
-	// 
-	private float needleDistance = 0.5f;
-
-	// tracking how many needles we've fired
-	private int needleIndex = 0;
+	private GameObject needleToFire;
 
 	// the increment of speed increase per successful pin placement
 	private float rotationIncreaseIncrement = 5f;
 
-	// Score Management START ------------------ //
 
 	// Text object for the score display
 	[SerializeField] private Text scoreText;
 
 	// keep track of the score.
 	private int score = 0;
-	// Score Management END ------------------ //
 
 
 	// Use this for initialization
@@ -52,18 +43,16 @@ public class GameManager : MonoBehaviour {
 			instance = this;
 		}
 
-		// set button reference
-		//GetButton();
-
-
 
 	}
 
 
+
+	// Start up the game
 	void Start () 
 	{
-		// create the series of needles on start
-//		CreateNeedles();
+
+		// Create the first needle
 		InstantiateNeedle();
 
 		// disable the game over text
@@ -75,88 +64,30 @@ public class GameManager : MonoBehaviour {
 	}
 
 
-	// Update is called once per frame
-	void Update () 
+	// Create new needle
+	public void InstantiateNeedle ()
 	{
-					
+
+		Debug.Log("InstantiateNeedle() Called");
+
+		// Spawn the needle and store it as a game object		
+		needleToFire = Instantiate(needle, transform.position, Quaternion.identity) as GameObject;
+
 	}
 
 
-	// Set reference to shoot button and add the OnClik functionality
-//	private void GetButton()
-//	{
-//
-//		// get a reference to the button
-//		shootButton = GameObject.Find("Shoot Button").GetComponent<Button>();
-//
-//		// add the fire function to the button
-//		shootButton.onClick.AddListener( () => ShootTheNeedle() );
-//
-//	}
-
 	// Shoot the needle function
-	// connected to the shoot button
 	public void ShootTheNeedle ()
 	{
 		Debug.Log("ShootTheNeedle() called");
 
-		needle.GetComponent<NeedleMovement>().FireTheNeedle();
-
-//		// Call the FireTheNeedle() function to send the needle toward the Circle
-//		gameNeedles[needleIndex].GetComponent<NeedleMovement>().FireTheNeedle();
-//		needleIndex++;
-
-
-//		// Check to see if we're out of needles
-//		if(needleIndex == gameNeedles.Length) {
-//
-//			Debug.Log("No more needs, game is finished");
-//
-//			// remove the functionality from the button to prevent errors
-//			shootButton.onClick.RemoveAllListeners();
-//
-//		}
-
+		// Fire the needle through the fire function attached to this new needle
+		needleToFire.GetComponent<NeedleMovement>().FireTheNeedle();
 
 	}
 
 
-//	// Spawn the needles for this round
-//	private void CreateNeedles ()
-//	{
-//
-//		// create empty array of X elements
-//		gameNeedles = new GameObject[howManyNeedles];
-//
-//
-//		// store the current position of the GameManager object
-//		Vector3 temp = transform.position;
-//
-//		// spawn and store the needles in an array
-//		for (int i = 0; i < gameNeedles.Length; i++) {
-//
-//			// create the needle and assign it to this element position
-//			gameNeedles[i] = Instantiate(needle, temp, Quaternion.identity) as GameObject;
-//
-//			// move it down in increments
-//			//temp.y -= needleDistance;
-//		}
-//
-//	}
-
-	// needle creation function
-	// OPTIONAL DEPENDING ON HOW WE WANT THE GAME TO PLAY
-	// CALL FROM THE NEEDLE MOVEMENT SCRIPT EACH TIME THE NEEDLE IS CONSUMED
-	public void InstantiateNeedle ()
-	{
-		
-		needle = Instantiate(needle, transform.position, Quaternion.identity) as GameObject;
-
-
-
-	}
-
-
+	// Update the score counter and spawn the next needle
 	public void SetScore ()
 	{
 		// increment the score
@@ -166,10 +97,13 @@ public class GameManager : MonoBehaviour {
 		// Increase the rotation speed
 		GameObject.Find("Circle_Large").GetComponent<CircleRotate>().rotationSpeed += rotationIncreaseIncrement;
 
+		// Spawn the next needle
+		InstantiateNeedle();
+
 		//Debug.Log("SetScore() called");
 	}
 
-
+	// Handling the game end conditions
 	public void GameOver()
 	{
 		// log game over

@@ -22,18 +22,19 @@ public class NeedleMovement : MonoBehaviour {
 	void Awake ()
 	{
 
+		// get the Rigidbody of the Parent Needle object for use later
+		myBody = GetComponent<Rigidbody2D>();
+		Debug.Log("MyBody:" + myBody);
+
 		Initialize ();
 
-		// TODO - debug to remvoe
-		//FireTheNeedle();	
-
 	}
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+//	// Use this for initialization
+//	void Start () {
+//		
+//	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -56,8 +57,7 @@ public class NeedleMovement : MonoBehaviour {
 		// deactivate the needlebody to start
 		needleBody.SetActive(false);
 
-		// get the Rigidbody of the Parent Needle object for use later
-		myBody = GetComponent<Rigidbody2D>();
+
 
 	}
 
@@ -115,7 +115,6 @@ public class NeedleMovement : MonoBehaviour {
 				// incremenet and update the score
 				GameManager.instance.SetScore();
 
-				GameManager.instance.InstantiateNeedle();
 	
 			}
 
